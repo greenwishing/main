@@ -11,6 +11,11 @@ body:before {
   background: rgb(145,205,233) url('../images/page-bg-xs.jpg') no-repeat;
   background-position: center center;
   background-size: cover;
+  -webkit-filter: blur(15px);
+     -moz-filter: blur(15px);
+      -ms-filter: blur(15px);
+       -o-filter: blur(15px);
+          filter: blur(15px);
 }
 
 p { margin: 0; line-height: 1.5;}
