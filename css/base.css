@@ -26,8 +26,9 @@ body:before {
 }
 
 p { margin: 0; line-height: 1.5;}
-p:first-child:before { content: '“'; font-size: 200%;}
-p:last-child:after { content: '”'; font-size: 200%;}
+
+blockquote p:first-child:before { content: '“'; font-size: 200%;}
+blockquote p:last-child:after { content: '”'; font-size: 200%;}
 
 .page-container {
   z-index: 100;
