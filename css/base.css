@@ -1,18 +1,12 @@
 html, body { margin: 0; padding: 0; height: 100%; width: 100%;}
-body:before {
+body {
   z-index: 1;
-  content: ' ';
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
+  position: relative;
   background: rgb(145,205,233) url('../images/page-bg-xs.jpg') no-repeat;
   background-position: center center;
   background-size: cover;
 }
-body:after {
+body:before {
   z-index: 2;
   content: ' ';
   position: absolute;
