@@ -27,8 +27,9 @@ body:before {
 
 p { margin: 0; line-height: 1.5;}
 
-blockquote:before { content: '“'; position: relative; display: block; font-size: 200%;}
-blockquote:after { content: '”'; position: relative; display: block; font-size: 200%;}
+blockquote p { text-indent: 2em;}
+blockquote:before { content: '“'; position: relative; display: block; font-size: 2em;}
+blockquote:after { content: '”'; position: relative; display: block; font-size: 2em;}
 
 .page-container {
   z-index: 100;
