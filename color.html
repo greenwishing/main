@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ÖÐ¹ú´«Í³É«</title>
+</head>
+<body>
+<div id="box"></div>
+
+<script type="text/javascript">
+  var box = document.getElementById('box');
+  setStyle(box, {position: 'relative', width: '50%', margin: '0 auto', padding: '15px'});
+  var publicStyles = {position: 'relative', color: 'rgb(255,255,255)', padding: '10px', 'border-radius': '10px', 'box-shadow': '0 0 10px rgba(0,0,0,0.3)', 'text-shadow': '0 1px 1px rgba(0,0,0,0.5)', 'margin-top': '-10px'};
+  var colorGroups = [[
+    {style: {'background-color': 'rgb(245,36,67)'}, name: 'ÒøÐÇº£ÌÄ'},
+    {style: {'background-color': 'rgb(230,0,57)'}, name: 'Êïºì'},
+    {style: {'background-color': 'rgb(225,11,43)'}, name: 'ÔÂ¼¾ºì'},
+    {style: {'background-color': 'rgb(215,4,25)'}, name: '½¶ºì'},
+    {style: {'background-color': 'rgb(255,68,26)'}, name: '½Ûºì'},
+    {style: {'background-color': 'rgb(204,0,51)'}, name: 'ÜÔÀò»¨ºì'},
+    {style: {'background-color': 'rgb(204,0,0)'}, name: 'ÐÉºì'},
+    {style: {'background-color': 'rgb(200,9,38)'}, name: 'ÄñÂÞËÉºì'},
+    {style: {'background-color': 'rgb(199,0,36)'}, name: '·¬ÇÑºì'},
+    {style: {'background-color': 'rgb(191,4,23)'}, name: 'ÑÞºì'},
+    {style: {'background-color': 'rgb(184,2,51)'}, name: 'Äµµ¤ºì'},
+    {style: {'background-color': 'rgb(179,0,0)'}, name: 'ÏóÑÀºì'},
+    {style: {'background-color': 'rgb(206,59,59)'}, name: '³¼É°¡¢ºìÉÈ±´'},
+    {style: {'background-color': 'rgb(188,46,46)'}, name: 'ÍÁºì'},
+    {style: {'background-color': 'rgb(176,37,2)'}, name: 'Áñ»¨ºì'}
+  ],[
+    {style: {'background-color': 'rgb(255,250,232)'}, name: 'ºú·Û'},
+    {style: {'background-color': 'rgb(255,250,230)'}, name: 'Òø°×'},
+    {style: {'background-color': 'rgb(254,248,222)'}, name: 'À¯°×'},
+    {style: {'background-color': 'rgb(254,243,201)'}, name: 'Èé°×'},
+    {style: {'background-color': 'rgb(254,239,182)'}, name: 'Èé»Æ'},
+    {style: {'background-color': 'rgb(249,228,89)'}, name: 'µ¤¶«Ê¯'},
+    {style: {'background-color': 'rgb(218,214,171)'}, name: 'Ïº»Ò'},
+    {style: {'background-color': 'rgb(254,248,201)'}, name: 'µ­»Æ'},
+    {style: {'background-color': 'rgb(254,244,180)'}, name: '¸»´º·»'},
+    {style: {'background-color': 'rgb(239,231,171)'}, name: 'Ð¡ð¯»Æ'},
+    {style: {'background-color': 'rgb(255,255,215)'}, name: 'µ­Ã×'},
+    {style: {'background-color': 'rgb(250,237,75)'}, name: 'ÌÙ»Æ'},
+    {style: {'background-color': 'rgb(211,211,124)'}, name: '¿ÝÂÌ'},
+    {style: {'background-color': 'rgb(254,242,99)'}, name: 'ÄÛ½ª»Æ'},
+    {style: {'background-color': 'rgb(244,234,32)'}, name: '²Ý»Æ'}
+  ],[
+    {style: {'background-color': 'rgb(126,205,182)'}, name: '¹û»Ò'},
+    {style: {'background-color': 'rgb(51,125,86)'}, name: '¶¬ÂÌ'},
+    {style: {'background-color': 'rgb(179,255,188)'}, name: 'ÈýÂÌ'},
+    {style: {'background-color': 'rgb(2,119,79)'}, name: 'ÉîÂÌ±¦Ê¯'},
+    {style: {'background-color': 'rgb(21,106,30)'}, name: 'ðÐðÄÂÌ'},
+    {style: {'background-color': 'rgb(2,130,85)'}, name: '´Ö¿×È¸ÂÌ'},
+    {style: {'background-color': 'rgb(52,158,105)'}, name: '¶¬¹ÏÂÌ'},
+    {style: {'background-color': 'rgb(111,249,193)'}, name: 'ÓñÂÌ'},
+    {style: {'background-color': 'rgb(2,179,64)'}, name: '°ÍÀèÂÌ'},
+    {style: {'background-color': 'rgb(19,30,30)'}, name: '÷ìÀ¶'},
+    {style: {'background-color': 'rgb(188,199,199)'}, name: 'Õý»Ò'},
+    {style: {'background-color': 'rgb(139,163,158)'}, name: 'À¶»Ò'},
+    {style: {'background-color': 'rgb(0,49,41)'}, name: 'É³ÂÌ'},
+    {style: {'background-color': 'rgb(152,180,179)'}, name: '´ºÀ¶'},
+    {style: {'background-color': 'rgb(230,255,253)'}, name: 'Ñ¼µ°Çà'}
+  ],[
+    {style: {'background-color': 'rgb(225,227,230)'}, name: 'ÒøÀ¶'},
+    {style: {'background-color': 'rgb(107,154,201)'}, name: 'ÖñÔÂ'},
+    {style: {'background-color': 'rgb(230,102,255)'}, name: 'Ç³·ïÏÉ×Ï'},
+    {style: {'background-color': 'rgb(115,0,153)'}, name: 'ÇàÁ«'},
+    {style: {'background-color': 'rgb(255,153,255)'}, name: '×ÏÞ±'},
+    {style: {'background-color': 'rgb(115,46,126)'}, name: '×ÏÂÞÀ¼'},
+    {style: {'background-color': 'rgb(142,72,142)'}, name: 'Ñó´Ð×Ï'},
+    {style: {'background-color': 'rgb(191,128,255)'}, name: 'Ä¾éÈ×Ï'},
+    {style: {'background-color': 'rgb(149,101,177)'}, name: '·ïÏÉ×Ï'},
+    {style: {'background-color': 'rgb(204,153,255)'}, name: 'Ç³Ê¯Ó¢×Ï'},
+    {style: {'background-color': 'rgb(26,0,51)'}, name: 'Áúµ¨×Ï'},
+    {style: {'background-color': 'rgb(80,58,101)'}, name: '¶¡Ïã×Ï'},
+    {style: {'background-color': 'rgb(217,179,255)'}, name: '×ÏË®¾§'},
+    {style: {'background-color': 'rgb(181,164,196)'}, name: '×ÏÌÙ»Ò'},
+    {style: {'background-color': 'rgb(180,164,202)'}, name: 'ÉÁµû×Ï'}
+  ],[
+    {style: {'background-color': 'rgb(3,16,37)'}, name: 'ÉîÃ«À¶'},
+    {style: {'background-color': 'rgb(60,55,74)'}, name: 'ÂÞÀ¼»Ò'},
+    {style: {'background-color': 'rgb(11,45,100)'}, name: 'º£À¶'},
+    {style: {'background-color': 'rgb(119,123,206)'}, name: 'Ñ©À¶'},
+    {style: {'background-color': 'rgb(63,68,112)'}, name: 'ç¤Çà'},
+    {style: {'background-color': 'rgb(47,73,136)'}, name: 'Ç³º£²ýÀ¶'},
+    {style: {'background-color': 'rgb(46,98,205)'}, name: 'ÉîÖñÔÂ'},
+    {style: {'background-color': 'rgb(40,79,149)'}, name: 'ÉîÃ«ÔÂ'},
+    {style: {'background-color': 'rgb(40,49,68)'}, name: 'Èµ»Ò'},
+    {style: {'background-color': 'rgb(18,44,75)'}, name: 'Ç³ÍÁÀ¶'},
+    {style: {'background-color': 'rgb(159,160,215)'}, name: 'Çà½ð'},
+    {style: {'background-color': 'rgb(24,58,101)'}, name: 'ÁðÁ§À¶'},
+    {style: {'background-color': 'rgb(31,79,137)'}, name: 'ÈÞÀ¶¡¢±±¾©Ã«À¶'},
+    {style: {'background-color': 'rgb(87,109,147)'}, name: '»¨Çà'},
+    {style: {'background-color': 'rgb(191,190,211)'}, name: 'Ñ©Çà»Ò'}
+  ]];
+  var index = 0;
+  for (var i in colorGroups) {
+    var colorGroup = colorGroups[i];
+    for (var j in colorGroup) {
+      var color = colorGroup[j];
+      create(color, box);
+    }
+    var blank = document.createElement('div');
+    blank.style['height'] = '35px';
+    box.appendChild(blank);
+  }
+  function create(options, box) {
+    var e = document.createElement('div');
+    setStyle(e, publicStyles);
+    setStyle(e, options.style);
+    setStyle(e, {left: ((index%2==0)?'10%':'-10%'), 'text-align': ((index%2==0)?'right':'left')});
+    e.innerHTML = options.name;
+    box.appendChild(e);
+    index ++;
+  }
+  function setStyle(e, styles) {
+    for (var s in styles) {
+      e.style[s] = styles[s];
+    }
+  }
+</script>
+</body>
+</html>

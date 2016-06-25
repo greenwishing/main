@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS3 Clock (Javascript create)</title>
+<script type="text/javascript">
+
+domReady(function() {
+  new Clock({radius: 200}).init();
+});
+
+function domReady(fun) {
+  if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', fun, false);
+  } else if (document.attachEvent) {
+    document.attachEvent('onload', fun);
+    document.attachEvent('onreadystatechange', fun);
+  }
+}
+
+(function(){
+/**
+ *
+ *  @author: wufan
+ *  @date: 2014.02.14
+ *  @email: greenwishing@msn.cn
+ *  @description: test in webkit browser kernel only
+ *
+ **/
+ 
+  window.Clock = function(options) {
+    this.settings = this.extend(Clock.defaults, options);
+    
+    this.N = this.settings.number;
+    this.R = this.settings.radius;
+    this.P = this.settings.padding;
+    this.S = 360 / this.N; 
+    
+    this.box = null;
+    this.hours = null;
+    this.minutes = null;
+    this.seconds = null;
+    this.started = false;
+    
+  }
+  window.Clock.prototype = {
+    init: function(){
+      var box = document.createElement('div');
+      this.setStyle(box, {
+        position: 'relative',
+        display: 'none',
+        background: this.settings.background,
+        margin: '35px auto',
+        'box-shadow': '3px 3px 3px rgba(255,255,255,0.5) inset, -3px -3px 3px rgba(0,0,0,0.2) inset'
+      });
+      var body = document.getElementsByTagName('body')[0];
+      this.setStyle(body,{
+        background: 'rgb(253,253,253)'
+      });
+      body.appendChild(box);
+      
+      var ul = this.createClockDots();
+      box.appendChild(ul);
+      
+      var pointers = this.settings.pointers;
+      for (var type in pointers) {
+        var pointer = this.createPointer(type, pointers[type]);
+        box.appendChild(pointer);
+      }
+      var origin = this.createOrigin();
+      box.appendChild(origin);
+      
+      this.box = box;
+      
+      this.start();
+    },
+    start: function(){
+      var _this = this;
+      setInterval(function(){
+        _this.work();
+      }, this.settings.hz);
+    },
+    work: function(){
+      var date = new Date();
+      var ms = date.getMilliseconds();
+      var s = date.getSeconds() + (ms / 1000.0);
+      var m = date.getMinutes() + (s / 60.0);
+      var h = date.getHours() + (m / 60.0);
+      this.movePointer(this.seconds, s * 360 / 60 - 90);
+      this.movePointer(this.minutes, m * 360 / 60 - 90);
+      this.movePointer(this.hours, h * 360 / this.N - 90);
+      if (!this.started) {
+        this.setStyle(this.box, {
+          display: 'block',
+          width: this.R * 2 + 'px',
+          height: this.R * 2 + 'px',
+          'border-radius': this.R * 2 + 'px'
+        });
+        this.started = true;
+      }
+    },
+    createClockDots: function() {
+      var ul = document.createElement('ul');
+      this.setStyle(ul, {
+        'list-style': 'none',
+        margin: 0,
+        padding: 0
+      });
+      var parting = this.N / 2;
+      var index = 1;
+      for (var i=parting-1; i>=1; i--,index++) {
+        var li = this.createDot(index, i);
+        ul.appendChild(li);
+      }
+      for (var j=this.N; j>=parting; j--, index++) {
+        var li = this.createDot(index, j);
+        ul.appendChild(li);
+      }
+      return ul;
+    },
+    createDot: function(i, num) {
+      var li = document.createElement('li');
+      li.innerHTML = num;
+      var angle = (360 / this.N) * i;
+      var fontSize = Math.floor(this.settings.radius / 13);
+      var size = Math.floor(fontSize * 1.3);
+      var raidus = this.R - this.P;
+      var x = raidus + (raidus - this.P - size / 2) * Math.sin(angle * (Math.PI / 180));
+      var y = raidus + (raidus - this.P - size / 2) * Math.cos(angle * (Math.PI / 180));
+      this.setStyle(li, {
+        position: 'absolute',
+        display: 'block',
+        width: size + 'px',
+        height: size + 'px', 
+        'font-size': fontSize + 'px',
+        'text-align': 'center',
+        'font-family': 'microsoft yahei',
+        color: this.settings.color,
+        '-webkit-transform': 'translate(' + x + 'px, ' + y + 'px)'
+      })
+      return li;
+    },
+    createPointer: function(type, pointer) {
+      var height = pointer.height;
+      var width = this.R * pointer.width;
+      var originX = width * 0.2;
+      var originY = height / 2;
+      var left = this.R - originX;
+      var top = this.R - originY;
+      var P = document.createElement('div');
+      this.setStyle(P, {
+        position: 'absolute',
+        width: width + 'px', 
+        height: height + 'px',
+        left: left + 'px', 
+        top: top + 'px', 
+        background: pointer.color,
+        '-webkit-transform-origin': originX + 'px ' + originY + 'px'
+      });
+      this[type] = P;
+      return P;
+    },
+    createOrigin: function(){
+      var origin = document.createElement('div');
+      var setting = this.settings.origin;
+      var xORy = this.R - setting.size / 2;
+      this.setStyle(origin, {
+        position: 'absolute',
+        width: setting.size + 'px',
+        height: setting.size + 'px', 
+        top: xORy + 'px', 
+        left: xORy + 'px', 
+        'border-radius': setting.size + 'px',
+        'background': setting.color
+      });
+      return origin;
+    },
+    movePointer: function(pointer, angle) {
+      this.setStyle(pointer, {'-webkit-transform': 'rotate(' + angle + 'deg)'});
+    },
+    setStyle: function(elem, css) {
+      for (var i in css) {
+        elem.style[i] = css[i];
+      }
+    },
+    extend: function(dest, options) {
+      for (var i in options) {
+        console.log(i + ': ' + options[i] + ' - ' + typeof options[i]);
+        if (typeof options[i] == 'object') {
+          dest[i] = this.extend({}, options[i])
+        } else {
+          dest[i] = options[i];
+        }
+      }
+      return dest;
+    }
+  };
+  
+  window.Clock.defaults = {
+    number: 24,
+    radius: 200,
+    padding: 10,
+    hz: 1000,
+    background: 'rgb(225,225,225)',
+    color: 'rgb(80,120,180)',
+    pointers: {
+      hours: {
+        width: 0.4,
+        height: 8,
+        color: 'rgba(0,0,0,0.6)'
+      },
+      minutes: {
+        width: 0.6,
+        height: 4,
+        color: 'rgba(0,0,0,0.8)'
+      },
+      seconds: {
+        width: 0.8,
+        height: 2,
+        color: 'rgba(230,80,80,1)'
+      }
+    },
+    origin: {
+      size: 16,
+      color: 'rgba(255,255,255,0.8)'
+    }
+  };
+})();
+</script>
+</head>
+<body>
+</body>
+</html>
