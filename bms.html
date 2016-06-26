@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>记帐</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/underscore.string.min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>
+    <script type="text/javascript" src="js/backbone.localStorage.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+</head>
+<body>
+<div id="page" class="container"></div>
+<div class="btn-area btn-area-fixed">
+    <a href="index.html" class="btn">主页</a>
+    <div id="functions" class="pull-right"></div>
+</div>
+<script type="text/template" id="tpl-empty">
+    <p>这家伙很懒，什么都没留下！</p>
+</script>
+<script type="text/template" id="tpl-billing-item">
+    <div class="cell-bd">
+        <h3 class="cny"><%=amount%></h3>
+        <p class="cell-desc"><%=date%> <%=name%></p>
+        <a class="btn btn-mini btn-right item-remove" href="javascript:void(0)">&times;</a>
+    </div>
+</script>
+<script type="text/template" id="tpl-billing-total">
+    <p>合计：<span class="cny"><%=total%></span></p>
+</script>
+<script type="text/template" id="tpl-billing-form">
+    <div class="cells form-cells">
+        <div class="cell cell-select">
+            <div class="cell-hd">分类</div>
+            <div class="cell-bd">
+                <select id="category">
+                    <option value="">选择分类</option>
+                </select>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="cell-hd">日期</div>
+            <div class="cell-bd">
+                <input id="date" class="cell-input" type="date" placeholder="日期"/>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="cell-hd">金额</div>
+            <div class="cell-bd">
+                <input id="amount" class="cell-input" type="number" placeholder="金额"/>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="js/bms.js"></script>
+</body>
+</html>

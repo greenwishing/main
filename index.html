@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Welcome</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -10,31 +10,39 @@
     <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/base.js"></script>
     <script type="text/javascript">
-      $(function(){
-        // var in_love = moment('2015-08-15');
-        setInterval(function(){
-          $('.time').html(moment().format('YYYY-MM-DD HH:mm:ss'));
-        }, 1000);
-      });
+        $(function () {
+            // var in_love = moment('2015-08-15');
+            setInterval(function () {
+                $('.time').html(moment().format('YYYY-MM-DD HH:mm:ss'));
+            }, 1000);
+        });
     </script>
-  </head>
-  <body>
-    <div class="page-container">
-      <!--<header>
-        <h1></h1>
-      </header>-->
-      <section>
-        <blockquote>
-          <p>好像全世界都在下雨！</p>
-          <p>很想问你有没有带伞，可是我忍住了。 </p>
-          <p>因为我怕你说没带，而我又无能为力。</p>
-          <p>就像是我爱你，却给不到你想要的陪伴。</p>
-        </blockquote>
-        <p class="time" style="text-align: right;"></p>
-      </section>
-    </div>
-    <footer>
-      <p>@greenwishing</p>
-    </footer>
-  </body>
+    <style>
+        .container {
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, .5);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <blockquote>
+        <p>好像全世界都在下雨！</p>
+
+        <p>很想问你有没有带伞，可是我忍住了。 </p>
+
+        <p>因为我怕你说没带，而我又无能为力。</p>
+
+        <p>就像是我爱你，却给不到你想要的陪伴。</p>
+    </blockquote>
+    <p class="time" style="text-align: right;"></p>
+</div>
+<footer>
+    <ul class="flex">
+        <li class="flex-item"><a href="bms.html">Local BMS</a></li>
+        <li class="flex-item text-right">@greenwishing</li>
+    </ul>
+</footer>
+</body>
 </html>
