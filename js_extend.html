@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Js extend test</title>
+  <script type="text/javascript">
+	
+	function User(name) {
+	  this.name = name;
+	}
+	User.prototype.say = function(word){
+	  console.log(this.name + ' say: ' + word);
+	}
+	User.extend = function(){
+	  var parent = this;
+	  var child = function(){ return parent.apply(this, arguments);};
+	  var F = function(){ this.constructor = child;};
+	  F.prototype = parent.prototype;
+	  child.prototype = new F;
+	  for (var index in arguments) {
+		var source = arguments[index], type = typeof source;
+		if (type === 'function' || type === 'object' && !!source) {
+		  for (var key in source) child.prototype[key] = source[key];
+		}
+	  }
+	  child.__super__ = parent.prototype;
+	  return child;
+	};
+	
+	var user = new User('Zhang san');
+	user.say('hello!');
+	
+	var Eatable = User.extend({
+	  say: function(word, sth){
+	    console.log(this.name + ' eating ' + sth + ' and say: ' + word);
+	  }
+	});
+	
+	var eatable = new Eatable('Li si');
+	eatable.say('hi!', 'Banana');
+  </script>
+</head>
+<body></body>
+</html>
